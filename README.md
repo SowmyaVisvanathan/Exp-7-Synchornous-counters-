@@ -76,29 +76,29 @@ RegisterNumber: 212222110045
 ```
 ## UPCOUNTER:
 ```
-module upcounter(A,clk);
-output reg [3:0]A;
-input clk;
-always@(posedge clk)
+module upcounter(D,C,B,A,CLK);
+output reg D,C,B,A;
+input CLK;
+always @(posedge CLK)
 begin
-A[0]=((((A[1])&(A[2]))&A[3])^A[0]);
-A[1]=(((A[2])&(A[3]))^A[1]);
-A[2]=((A[3])^A[2]);
-A[3]=1^A[3];
+	D=(C&B&A)^D;
+	C=(B&A)^C;
+	B=(A^B);
+	A=(1^A);
 end
 endmodule
 ```
 ## DOWNCOUNTER:
 ```
-module downcounter(A,clk);
-output reg [3:0]A;
-input clk;
-always@(posedge clk)
+module downcounter(A,B,C,D,CLK);
+input CLK;
+output reg A,B,C,D;
+always@(posedge CLK)
 begin
-A[3]=((((~A[2])&(~A[1]))&(~A[0]))^A[3]);
-A[2]=(((~A[1])&(~A[0]))^A[2]);
-A[1]=((~A[0])^A[1]);
-A[0]=1^A[0];
+	A=(((~B)&(~C)&(~D))^A);
+	B=(((~C)&(~D))^B);
+	C=((~D)^(C));
+	D=1^(D);
 end
 endmodule
 ```
@@ -116,7 +116,7 @@ endmodule
 ### TIMING DIGRAMS FOR COUNTER  
 
 ## upcounter
-![image](https://github.com/SowmyaVisvanathan/Exp-7-Synchornous-counters-/assets/119475775/26e86677-7d81-4d18-ab81-63ab29111d8e)
+![image](https://github.com/SowmyaVisvanathan/Exp-7-Synchornous-counters-/assets/119475775/ea0eef8b-9de0-4c43-906a-53ca26fb7e1b)
 
 ## downcounter
 
@@ -130,7 +130,7 @@ endmodule
 
 ## downcounter
 
-![image](https://github.com/SowmyaVisvanathan/Exp-7-Synchornous-counters-/assets/119475775/8430b9b0-fed2-4d40-adc6-e65f31e470b0)
+![image](https://github.com/SowmyaVisvanathan/Exp-7-Synchornous-counters-/assets/119475775/ee7f4b6f-2b0c-452e-99bf-ee1751cfc001)
 
 
 ### RESULTS 
